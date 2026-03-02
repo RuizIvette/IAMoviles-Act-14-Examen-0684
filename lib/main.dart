@@ -4,7 +4,7 @@ import 'mispantallas/pantalla2.dart';
 import 'mispantallas/pantalla3.dart';
 
 void main() {
-  runApp(JugueteriaApp());
+  runApp(const JugueteriaApp());
 }
 
 class JugueteriaApp extends StatelessWidget {
