@@ -1,33 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../main.dart';
 
 class Inicio extends StatelessWidget {
   const Inicio({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: const Text(
-          "Juguetería Ivette Ruiz 6I",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-        actions: const [
-          Icon(Icons.notifications_none, color: Colors.black),
-          SizedBox(width: 10),
-          Icon(Icons.person_outline, color: Colors.black),
-          SizedBox(width: 10),
+        title: const Text("Juguetería Ivette Ruiz 6I"),
+        actions: [
+          IconButton(
+            icon: Icon(themeProvider.themeMode == ThemeMode.dark ? Icons.light_mode : Icons.dark_mode),
+            onPressed: () => themeProvider.toggleTheme(),
+            tooltip: 'Toggle Theme',
+          ),
+          IconButton(
+            icon: const Icon(Icons.auto_mode),
+            onPressed: () => themeProvider.setSystemTheme(),
+            tooltip: 'Set System Theme',
+          ),
+          const SizedBox(width: 10),
         ],
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
+            Text(
               "Ivette Ruiz 6I",
-              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 30),
             Image.network(
@@ -36,25 +41,13 @@ class Inicio extends StatelessWidget {
             ),
             const SizedBox(height: 50),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              ),
               onPressed: () => Navigator.pushNamed(context, '/pantalla2'),
-              child: const Text("Sign Up", style: TextStyle(color: Colors.white, fontSize: 18)),
+              child: const Text("Sign Up"),
             ),
             const SizedBox(height: 10),
             TextButton(
               onPressed: () => Navigator.pushNamed(context, '/pantalla2'),
-              child: const Text(
-                "i have an account",
-                style: TextStyle(
-                  color: Colors.black, 
-                  decoration: TextDecoration.underline,
-                  fontSize: 16
-                ),
-              ),
+              child: const Text("i have an account"),
             ),
           ],
         ),
